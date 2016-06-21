@@ -7,6 +7,12 @@
 import UIKit
 import AVFoundation
 
+
+
+// prepare for segue
+// enums in Swift
+// do catch error handling
+//
 extension PlaySoundsViewController: AVAudioPlayerDelegate {
     struct Alerts {
         static let DismissAlert = "Dismiss"
