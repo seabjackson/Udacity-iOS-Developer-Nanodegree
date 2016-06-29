@@ -55,12 +55,17 @@ isDigitsOnly("233")
 let dirtyWordsArray = ["phooey", "darn", "drat", "blurgh", "jupiters", "argh", "fudge"]
 
 func removeDirtyWords(dirtyWords: [String]) -> [String] {
-    for word in dirtyWordsArray {
-        if word.count == 4 {
-            dirtyWordsArray.removeAtIndex(word)
+    var cleanArray = [String]()
+    for word in dirtyWords {
+        if word.characters.count != 4 {
+            cleanArray.append(word)
         }
     }
+    return cleanArray
 }
+
+removeDirtyWords(dirtyWordsArray)
+
 
 //: __Problem 5__
 //:
@@ -69,6 +74,19 @@ func removeDirtyWords(dirtyWords: [String]) -> [String] {
 var movies:Dictionary<String,String> = [ "Boyhood":"Richard Linklater","Inception":"Christopher Nolan", "The Hurt Locker":"Kathryn Bigelow", "Selma":"Ava Du Vernay", "Interstellar":"Christopher Nolan"]
 
 class MovieArchive {
-
+    
+    func filterByDirector(movieTitles: Dictionary<String, String>, nameOfDirector: String) -> [String] {
+        var movies = [String]()
+        for (movie, director) in movieTitles {
+            if director == nameOfDirector {
+                movies.append(movie)
+            }
+        }
+        return movies
+    }
 }
+
+var movieArchive = MovieArchive()
+print(movieArchive.filterByDirector(movies, nameOfDirector: "Christopher Nolan"))
+
 
