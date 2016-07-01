@@ -27,87 +27,117 @@ var espressoForGabrielle = macchiato
 espressoForGabrielle.steamedMilk = .Splash
 macchiato.steamedMilk
 
+// 1
+// It will be .None if implemented as a struct, but .splash if implemented as a Clash
 //: __Problem 2__
 //:
 //: __2a.__
 //: Write an enum to represent the five fingers on a human hand.
+
+enum Finger: Int {
+    case Thumb, Index,  Middle,  Wedding, Pinky
+}
+
 //:
 //: __2b.__
 //: Associate an Int value with each finger.
 
 //: __Problem 3__
-//:
-//: Enum, class, or struct?
-//:
+
 //: Uncomment the code below and choose whether each type should be an enum, class, or struct.
-//____ Window {
-//    let height: Double
-//    let width: Double
-//    var open: Bool
-//}
+struct Window {
+    let height: Double
+    let width: Double
+    var open: Bool
+}
 
-//____ WritingImplement {
-//    case Pen
-//    case Pencil
-//    case Marker
-//    case Crayon
-//    case Chalk
-//}
+enum WritingImplement {
+    case Pen
+    case Pencil
+    case Marker
+    case Crayon
+    case Chalk
+}
+struct  Material {
+    let name: String
+    let density: Double
+    let stiffness: Double
+}
 
-//____ Material {
-//    let name: String
-//    let density: Double
-//    let stiffness: Double
-//}
 
+struct Bicycle {
+    let frame: Material
+    let weight: Double
+    let category: String
 
-//____ Bicycle {
-//    let frame: Material
-//    let weight: Double
-//    let category: String
-//
-//    static var bikeCategories: [String] = ["Road", "Touring", "Mountain", "Commuter", "BMX"]
-//
-//    func lookCool() {
-//        print("Check out my gear-shifters!")
-//    }
-//}
+    static var bikeCategories: [String] = ["Road", "Touring", "Mountain", "Commuter", "BMX"]
 
-//____ Cyclist {
-//    var speed: Double
-//    let agility: Double
-//    let bike: Bicycle
-//
-//    var maneuverability: Double {
-//        get {
-//            return agility - speed/5)
-//        }
-//    }
-//
-//    init(speed: Double, agility: Double, bike: Bicycle) {
-//        self.speed = speed
-//        self.agility = agility
-//        self.bike = bike
-//    }
-//
-//    func brake() {
-//        speed--
-//    }
-//
-//    func pedalFaster(factor: Double) {
-//        speed * factor
-//    }
-//}
+    func lookCool() {
+        print("Check out my gear-shifters!")
+    }
+}
 
-//____ Size: String {
-//    case Small = "8 ounces"
-//    case Medium = "12 ounces"
-//    case Large = "16 ounces"
-//}
+class Cyclist {
+    var speed: Double
+    let agility: Double
+    let bike: Bicycle
+
+    var maneuverability: Double {
+        get {
+            return agility - speed / 5
+        }
+    }
+
+    init(speed: Double, agility: Double, bike: Bicycle) {
+        self.speed = speed
+        self.agility = agility
+        self.bike = bike
+    }
+
+    func brake() {
+        speed -= 1
+    }
+
+    func pedalFaster(factor: Double) {
+        speed * factor
+    }
+}
+
+enum Size: String {
+    case Small = "8 ounces"
+    case Medium = "12 ounces"
+    case Large = "16 ounces"
+}
 
 //: __Problem 4__
 //:
 //: Write a cookie struct.
+
+struct Cookie {
+    
+    let flavor = "Chocolate"
+    var minutesSinceRemovedFromOven = 6
+    
+    var delicious: Bool {
+        get {
+            if self.flavor == "Chocolate" && self.minutesSinceRemovedFromOven < 10 {
+                return true
+            }
+            return false
+        }
+    }
+    
+    func tempt() {
+        if delicious {
+            print("Please eat me now.")
+        }
+    }
+    
+}
+
+let bestCookie = Cookie()
+bestCookie.tempt()
+bestCookie.delicious
 //:
 //: __4a.__
 //: Include 2 stored properties. Examples might include a string representing flavor, or an int representing minutesSinceRemovalFromOven.
@@ -127,7 +157,35 @@ macchiato.steamedMilk
 //:
 //: __5a.__
 //: Include 3 stored properties. Examples might include a category representing the type of housing i.e. apartment or house, or a bool representing availability.
+enum Housing {
+    case Apartment, House, Hostel
+}
+class BnBListing {
+    
+    let category: Housing
+    var availability: Bool
+    let AirBnBRating: Int
+    
+    init(category: Housing, availability: Bool, AirBnBRating: Int) {
+        self.category = category
+        self.availability = availability
+        self.AirBnBRating = AirBnBRating
+    }
+    
+    func book() {
+        if AirBnBRating >= 4 {
+            print("Congrats you're so lucky")
+            availability = true
+        } else {
+            print("Sorry we're overbooked! Try booking earlier")
+            availability = false
 
+        }
+    }
+}
+
+let urbanpack = BnBListing(category: .Hostel, availability: true, AirBnBRating: 3)
+urbanpack.book()
 //: __5b.__
 //: Consider writing a helper enum and incorporating it as one of your properties.
 
