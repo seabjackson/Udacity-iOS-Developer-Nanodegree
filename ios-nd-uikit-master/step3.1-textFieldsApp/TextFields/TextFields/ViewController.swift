@@ -15,9 +15,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField2: UITextField!
     @IBOutlet weak var textField3: UITextField!
     @IBOutlet weak var characterCountLabel: UILabel!
+    @IBOutlet weak var editingSwitch: UISwitch!
+    
     
     // Text Field Delegate objects
-    let emojiDelegate = EmojiTextFieldDelegate()
+    let numericDelegate = NumericalDelegate()
+    let cashDelegate = CashTextFieldDelegate()
+    // let emojiDelegate = EmojiTextFieldDelegate()
     let colorizerDelegate = ColorizerTextFieldDelegate()
     
     // Life Cycle Methods
@@ -29,28 +33,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.characterCountLabel.hidden = true
         
         // Set the three delegates
-        self.textField1.delegate = emojiDelegate
-        self.textField2.delegate = colorizerDelegate
+        self.textField1.delegate = numericDelegate
+        self.textField2.delegate = cashDelegate
         self.textField3.delegate = self
+        
+        self.editingSwitch.setOn(false, animated: false)
     }
 
     
     // Text Field Delegate Methods
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-
-        // Figure out what the new text will be, if we return true
-        var newText: NSString = textField.text!
-        newText = newText.stringByReplacingCharactersInRange(range, withString: string)
-        
-        // hide the label if the newText will be an empty string
-        self.characterCountLabel.hidden = (newText.length == 0)
-        
-        // Write the length of newText into the label
-        self.characterCountLabel.text = String(newText.length)
-        
-        // returning true gives the text field permission to change its text
-        return true;
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return self.editingSwitch.on
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @IBAction func toggleTextEditor(sender: AnyObject) {
+        if !(sender as! UISwitch).on {
+            textField3.resignFirstResponder()
+        }
+    }
+    
 }
 
