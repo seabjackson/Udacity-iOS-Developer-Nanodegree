@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OYe-DM-Tgp">
+                                <rect key="frame" x="40" y="0.0" width="520" height="556"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZV-VL-ggu">
+                                <rect key="frame" x="0.0" y="28" width="600" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vFS-8d-qAS">
+                                <rect key="frame" x="0.0" y="529" width="600" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzf-dh-Xvx">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Album" id="Tzd-XZ-ACh">
+                                        <connections>
+                                            <action selector="pickAnImage:" destination="BYZ-38-t0r" id="3bq-RB-Euj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="fXu-Z4-UOm"/>
+                                    <barButtonItem systemItem="camera" id="mlI-yt-E7z">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="WM0-Xo-5yq"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="vFS-8d-qAS" secondAttribute="trailing" constant="-20" id="BNH-78-kFn"/>
+                            <constraint firstItem="mzf-dh-Xvx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Jfn-KZ-6Zw"/>
+                            <constraint firstItem="OYe-DM-Tgp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="OMa-Nt-RWz"/>
+                            <constraint firstItem="yZV-VL-ggu" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Pxc-UZ-eyY"/>
+                            <constraint firstItem="vFS-8d-qAS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RWL-hQ-QaR"/>
+                            <constraint firstItem="vFS-8d-qAS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="UFf-Kc-xyj"/>
+                            <constraint firstItem="OYe-DM-Tgp" firstAttribute="bottom" secondItem="mzf-dh-Xvx" secondAttribute="top" id="ZJF-uh-J3u"/>
+                            <constraint firstItem="OYe-DM-Tgp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="ZME-sh-YaY"/>
+                            <constraint firstItem="yZV-VL-ggu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aOk-Yt-X0j"/>
+                            <constraint firstItem="yZV-VL-ggu" firstAttribute="trailing" secondItem="mzf-dh-Xvx" secondAttribute="trailing" id="aqN-NJ-IHJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OYe-DM-Tgp" secondAttribute="trailing" constant="20" id="h9q-ha-0gx"/>
+                            <constraint firstItem="yZV-VL-ggu" firstAttribute="leading" secondItem="mzf-dh-Xvx" secondAttribute="leading" id="hUa-AH-Ebz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mzf-dh-Xvx" secondAttribute="trailing" constant="-20" id="lkD-OY-v4J"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mzf-dh-Xvx" secondAttribute="bottom" id="v24-Wb-nZq"/>
+                            <constraint firstItem="mzf-dh-Xvx" firstAttribute="top" secondItem="vFS-8d-qAS" secondAttribute="bottom" constant="10" id="zS9-t6-pse"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="vFS-8d-qAS" id="taN-9c-fzA"/>
+                        <outlet property="cameraButton" destination="mlI-yt-E7z" id="Tck-pZ-uZ3"/>
+                        <outlet property="imagePickerView" destination="OYe-DM-Tgp" id="1kp-j1-o4b"/>
+                        <outlet property="topTextField" destination="yZV-VL-ggu" id="9UW-Kc-Ube"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="368"/>
+        </scene>
+    </scenes>
+</document>
