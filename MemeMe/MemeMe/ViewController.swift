@@ -23,14 +23,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         // setting up the textfield
-        topTextField.delegate = self
-        bottomTextField.delegate = self
+        [topTextField, bottomTextField].forEach { $0.delegate = self }
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = NSTextAlignment.Center
-        bottomTextField.textAlignment = NSTextAlignment.Center
+        [topTextField, bottomTextField].forEach { $0.defaultTextAttributes = memeTextAttributes }
+        [topTextField, bottomTextField].forEach { $0.textAlignment = .Center }
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,6 +59,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    @IBAction func shareMeme(sender: UIBarButtonItem) {
+        [topTextField, bottomTextField].forEach { $0.resignFirstResponder() }
+        let memedImage = generateMemedImage()
+        let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityController.completionWithItemsHandler = {  }
+        self.presentViewController(activityController, animated: true, completion: nil)
+        
+    }
+    
+    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             imagePickerView.image = image
@@ -72,24 +81,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        if !topTextField.text!.isEmpty {
+        if !topTextField.text!.isEmpty && topTextField.isFirstResponder() {
             topTextField.text = ""
-            return
-        }
-        
-        if !bottomTextField.text!.isEmpty {
+        } else if !bottomTextField.text!.isEmpty && bottomTextField.isFirstResponder() {
             bottomTextField.text = ""
-            return
         }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        resetView()
         return true
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        self.view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomTextField.isFirstResponder() {
+            self.view.frame.origin.y -= getKeyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if bottomTextField.isFirstResponder() {
+            resetView()
+        }
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {
@@ -100,12 +114,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func subscribeToKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification
+            , object: nil)
     }
+    
     
     func unsubscribeFromKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func resetView() {
+        self.view.frame.origin.y = 0
+    }
+    
+    func generateMemedImage() -> UIImage {
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return memedImage
+    }
+    
+    func save() {
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image, memedImage: generateMemedImage())
     }
 
-
 }
+
 
