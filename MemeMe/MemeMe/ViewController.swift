@@ -15,8 +15,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var topBar: UIToolbar!
+    @IBOutlet weak var bottomBar: UIToolbar!
+    @IBOutlet weak var actionButton: UIBarButtonItem!
     
-    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: -1.0 ]
+    
+    
+    let memeTextAttributes = [ NSStrokeColorAttributeName: UIColor.blackColor(), NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!, NSStrokeWidthAttributeName: -3.0 ]
 
 
     override func viewDidLoad() {
@@ -28,14 +33,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.text = "BOTTOM"
         [topTextField, bottomTextField].forEach { $0.defaultTextAttributes = memeTextAttributes }
         [topTextField, bottomTextField].forEach { $0.textAlignment = .Center }
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
-        
+        actionButton.enabled = imagePickerView.image != nil
         // keyboard notifications
         self.subscribeToKeyboardNotifications()
     }
@@ -63,7 +66,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         [topTextField, bottomTextField].forEach { $0.resignFirstResponder() }
         let memedImage = generateMemedImage()
         let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityController.completionWithItemsHandler = {  }
+        activityController.completionWithItemsHandler = { (activity, success, items, error) in
+            if success {
+                self.save()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
         self.presentViewController(activityController, animated: true, completion: nil)
         
     }
@@ -129,11 +137,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func generateMemedImage() -> UIImage {
+        topBar.hidden = true
+        bottomBar.hidden = true
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
         let memedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        topBar.hidden = false
+        bottomBar.hidden = false
         return memedImage
     }
     

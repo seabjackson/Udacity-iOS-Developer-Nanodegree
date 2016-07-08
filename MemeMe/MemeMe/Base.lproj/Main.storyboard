@@ -31,6 +31,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbU-4C-csr">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="zjN-DB-ewM">
+                                        <connections>
+                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="rnM-Tm-KDX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qRW-qw-r6M"/>
+                                    <barButtonItem systemItem="cancel" id="dq5-Ol-l1B"/>
+                                </items>
+                            </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzf-dh-Xvx">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
@@ -45,18 +57,6 @@
                                             <action selector="pickAnImageFromCamera:" destination="BYZ-38-t0r" id="WM0-Xo-5yq"/>
                                         </connections>
                                     </barButtonItem>
-                                </items>
-                            </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PbU-4C-csr">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="action" id="zjN-DB-ewM">
-                                        <connections>
-                                            <action selector="shareMeme:" destination="BYZ-38-t0r" id="rnM-Tm-KDX"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qRW-qw-r6M"/>
-                                    <barButtonItem systemItem="cancel" id="dq5-Ol-l1B"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -84,9 +84,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionButton" destination="zjN-DB-ewM" id="9ml-pw-Uaa"/>
+                        <outlet property="bottomBar" destination="mzf-dh-Xvx" id="acz-fL-zS1"/>
                         <outlet property="bottomTextField" destination="vFS-8d-qAS" id="taN-9c-fzA"/>
                         <outlet property="cameraButton" destination="mlI-yt-E7z" id="Tck-pZ-uZ3"/>
                         <outlet property="imagePickerView" destination="OYe-DM-Tgp" id="1kp-j1-o4b"/>
+                        <outlet property="topBar" destination="PbU-4C-csr" id="upt-bc-wo5"/>
                         <outlet property="topTextField" destination="yZV-VL-ggu" id="9UW-Kc-Ube"/>
                     </connections>
                 </viewController>
