@@ -33,12 +33,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.text = "BOTTOM"
         [topTextField, bottomTextField].forEach { $0.defaultTextAttributes = memeTextAttributes }
         [topTextField, bottomTextField].forEach { $0.textAlignment = .Center }
+        actionButton.enabled = false
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(.Camera)
-        actionButton.enabled = imagePickerView.image != nil
         // keyboard notifications
         self.subscribeToKeyboardNotifications()
     }
@@ -80,6 +80,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             imagePickerView.image = image
+            actionButton.enabled = true
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
