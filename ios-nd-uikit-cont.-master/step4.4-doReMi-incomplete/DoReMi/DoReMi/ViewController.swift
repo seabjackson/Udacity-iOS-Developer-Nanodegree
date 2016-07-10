@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     // Choose some data to show in your table
     
-    let model = [
+    let model = [ "Do", "Re", "Mi"
         // TODO: Fill this array with data
     ]
     
@@ -25,10 +25,14 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //TODO: Implement method to return the correct number of rows.
+        return self.model.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         //TODO: Implement method to return cell with the correct reuseidentifier and populated with the correct data.
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier)! as UITableViewCell
+        cell.textLabel?.text = self.model[indexPath.row]
+        return cell
     }
 
 }

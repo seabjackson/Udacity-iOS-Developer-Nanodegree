@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="iYZ-Mq-4iF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="iYZ-Mq-4iF">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -55,21 +55,34 @@
                                     <action selector="makeYourMove:" destination="iYZ-Mq-4iF" eventType="touchUpInside" id="fGy-X8-GSq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zi8-b5-G3p">
+                                <rect key="frame" x="131" y="421" width="58" height="30"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <segue destination="3XO-KE-tzH" kind="modal" identifier="history" id="eaE-Rb-tn8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Ay7-rG-oQ3" firstAttribute="centerX" secondItem="Fgh-U1-uLB" secondAttribute="centerX" id="ER3-Hd-3dl"/>
+                            <constraint firstItem="fqQ-nG-h6S" firstAttribute="top" secondItem="zi8-b5-G3p" secondAttribute="bottom" constant="117" id="JCM-qg-qOF"/>
+                            <constraint firstItem="zi8-b5-G3p" firstAttribute="centerX" secondItem="uZk-oR-UzU" secondAttribute="centerX" id="QRD-R8-wsz"/>
                             <constraint firstItem="Ay7-rG-oQ3" firstAttribute="centerX" secondItem="uZk-oR-UzU" secondAttribute="centerX" id="ShH-vH-V8s"/>
                             <constraint firstItem="2pQ-vK-SEv" firstAttribute="leading" secondItem="uZk-oR-UzU" secondAttribute="leadingMargin" constant="40" id="Y4E-zJ-fsT"/>
+                            <constraint firstItem="zi8-b5-G3p" firstAttribute="leading" secondItem="uZk-oR-UzU" secondAttribute="leadingMargin" constant="115" id="co4-iy-oB7"/>
                             <constraint firstItem="kDr-vO-WkA" firstAttribute="top" secondItem="Ay7-rG-oQ3" secondAttribute="bottom" constant="45" id="dDf-3F-LnF"/>
                             <constraint firstItem="kDr-vO-WkA" firstAttribute="top" secondItem="2pQ-vK-SEv" secondAttribute="top" id="gWe-ML-OrK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zi8-b5-G3p" secondAttribute="trailing" constant="115" id="kbo-Ro-qFV"/>
                             <constraint firstItem="fqQ-nG-h6S" firstAttribute="top" secondItem="Fgh-U1-uLB" secondAttribute="bottom" constant="69" id="rK2-fH-g2c"/>
+                            <constraint firstItem="zi8-b5-G3p" firstAttribute="top" secondItem="HUJ-al-Ubx" secondAttribute="bottom" constant="401" id="sG6-5u-je2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kDr-vO-WkA" secondAttribute="trailing" constant="40" id="tts-7X-HQC"/>
                             <constraint firstItem="kDr-vO-WkA" firstAttribute="top" secondItem="uZk-oR-UzU" secondAttribute="top" constant="281" id="x7W-CJ-y4i"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DRJ-HZ-SdQ"/>
                     <connections>
+                        <outlet property="historyButton" destination="zi8-b5-G3p" id="hwG-5H-i7j"/>
                         <outlet property="paperButton" destination="Ay7-rG-oQ3" id="W20-lL-iti"/>
                         <outlet property="rockButton" destination="2pQ-vK-SEv" id="dpm-25-xrO"/>
                         <outlet property="scissorsButton" destination="kDr-vO-WkA" id="3bC-0b-DYi"/>
@@ -140,6 +153,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2li-T9-sgs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="809" y="141"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="ZN8-DO-aFL">
+            <objects>
+                <viewController id="3XO-KE-tzH" customClass="HistoryViewController" customModule="RockPaperScissors" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s2M-6G-bAo"/>
+                        <viewControllerLayoutGuide type="bottom" id="aSL-ja-PY5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KBa-Ff-KPC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bHq-nz-9ky">
+                                <rect key="frame" x="-4" y="20" width="328" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="historyCell" id="Kky-tP-2pl">
+                                        <rect key="frame" x="0.0" y="28" width="328" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kky-tP-2pl" id="ltE-kf-ZPt">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bHq-nz-9ky" firstAttribute="leading" secondItem="KBa-Ff-KPC" secondAttribute="leadingMargin" constant="-20" id="FWe-Fb-RvL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bHq-nz-9ky" secondAttribute="trailing" constant="-20" id="ugJ-dc-qop"/>
+                            <constraint firstItem="aSL-ja-PY5" firstAttribute="top" secondItem="bHq-nz-9ky" secondAttribute="bottom" id="wKm-vb-NhL"/>
+                            <constraint firstItem="bHq-nz-9ky" firstAttribute="top" secondItem="s2M-6G-bAo" secondAttribute="bottom" id="zMb-FE-LyG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TAd-Dm-Hxc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ST2-U0-KAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="784" y="819"/>
         </scene>
     </scenes>
     <resources>

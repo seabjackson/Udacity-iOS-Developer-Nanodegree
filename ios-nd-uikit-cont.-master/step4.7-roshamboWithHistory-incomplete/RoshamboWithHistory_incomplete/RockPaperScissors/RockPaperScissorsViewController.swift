@@ -13,6 +13,7 @@ class RockPaperScissorsViewController: UIViewController {
     @IBOutlet weak var rockButton: UIButton!
     @IBOutlet weak var paperButton: UIButton!
     @IBOutlet weak var scissorsButton: UIButton!
+    @IBOutlet weak var historyButton: UIButton!
     
     var match: RPSMatch!
     
@@ -72,9 +73,16 @@ class RockPaperScissorsViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        if segue.identifier == "history" {
+            let controller = segue.destinationViewController as! HistoryViewController
+            controller.history = self.history
+        }
+        
         //Notice that this code works for both Scissors and Paper
-        let controller = segue.destinationViewController as! ResultViewController
-        controller.match = self.match
+        if segue.identifier == "throwDownScissors" || segue.identifier == "throwDownPaper" {
+            let controller = segue.destinationViewController as! ResultViewController
+            controller.match = self.match
+        }
     }
    
     @IBAction func showHistory(sender: AnyObject) {
