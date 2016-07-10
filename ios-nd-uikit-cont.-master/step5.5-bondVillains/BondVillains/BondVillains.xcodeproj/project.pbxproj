@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A7BD51D1D32B2C400EB3C26 /* VillainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7BD51C1D32B2C400EB3C26 /* VillainDetailViewController.swift */; };
 		4D04CC021A1D1E5700FAB0D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */; };
 		4D04CC041A1D1E5700FAB0D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC031A1D1E5700FAB0D8 /* ViewController.swift */; };
 		4D04CC071A1D1E5700FAB0D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D04CC051A1D1E5700FAB0D8 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A7BD51C1D32B2C400EB3C26 /* VillainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VillainDetailViewController.swift; sourceTree = "<group>"; };
 		4D04CBFC1A1D1E5700FAB0D8 /* BondVillains.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BondVillains.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D04CC001A1D1E5700FAB0D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				4D04CC031A1D1E5700FAB0D8 /* ViewController.swift */,
+				2A7BD51C1D32B2C400EB3C26 /* VillainDetailViewController.swift */,
 				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
 				4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */,
 				4D04CC051A1D1E5700FAB0D8 /* Main.storyboard */,
@@ -219,6 +222,7 @@
 				4D04CC041A1D1E5700FAB0D8 /* ViewController.swift in Sources */,
 				4D04CC021A1D1E5700FAB0D8 /* AppDelegate.swift in Sources */,
 				4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */,
+				2A7BD51D1D32B2C400EB3C26 /* VillainDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // Get ahold of some villains, for the table
-    // This is an array of Villain instances
+    // This is an array of Villain vartances
     let allVillains = Villain.allVillains
     
     
@@ -39,9 +39,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    
     {
         return true
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detailController = self.storyboard?.instantiateViewControllerWithIdentifier("villainDetail") as! VillainDetailViewController
+        detailController.villain = self.allVillains[indexPath.row]
+        self.navigationController?.pushViewController(detailController, animated: true)
+        
+        
     }
 
 
