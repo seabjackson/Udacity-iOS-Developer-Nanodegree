@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "CollectionCell"
+ private let reuseIdentifier = "CollectionCell"
 
 class MemeCollectionViewController: UICollectionViewController {
     
@@ -66,7 +66,7 @@ class MemeCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = memes[indexPath.row]
+        let meme = memes[indexPath.item]
         let imageView = UIImageView(image: meme.memedImage)
         
         cell.backgroundView = imageView
