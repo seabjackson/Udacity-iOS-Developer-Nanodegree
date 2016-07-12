@@ -20,7 +20,7 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +42,12 @@ class MemeTableViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.cellImage.image = meme.memedImage
         cell.cellLabel.text = "\(meme.topText!)...\(meme.bottomText!)"
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetailViewController
+        memeDetailVC.meme = memes[indexPath.row]
+        navigationController?.pushViewController(memeDetailVC, animated: true)
     }
     
 

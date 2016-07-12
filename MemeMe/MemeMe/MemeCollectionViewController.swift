@@ -13,6 +13,7 @@ import UIKit
 class MemeCollectionViewController: UICollectionViewController {
     
     
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     // using the shared model
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
@@ -21,14 +22,21 @@ class MemeCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        changeFlowLayoutFor(view.frame.size)
+        
+    }
+    
+    func changeFlowLayoutFor(size: CGSize) {
+        let spacing: CGFloat = 1.0
+        let dimension: CGFloat = size.width > size.height ? (size.width - (5 * spacing)) / 6.0 : (size.width - (2 * spacing)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        changeFlowLayoutFor(size)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -36,27 +44,10 @@ class MemeCollectionViewController: UICollectionViewController {
         collectionView?.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
+
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,12 +58,17 @@ class MemeCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.item]
-        let imageView = UIImageView(image: meme.memedImage)
+        cell.imageView.image = meme.memedImage
+//        cell.topLabel.text = meme.topText
+//        cell.bottomLabel.text = meme.bottomText
         
-        cell.backgroundView = imageView
-        // Configure the cell
-    
         return cell
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier("MemeDetail") as! MemeDetailViewController
+        memeDetailVC.meme = memes[indexPath.item]
+        navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 
     // MARK: UICollectionViewDelegate
